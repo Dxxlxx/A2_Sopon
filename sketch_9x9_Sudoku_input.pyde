@@ -1,7 +1,7 @@
 import random
 
 grid = [[0 for _ in range(9)] for _ in range(9)]
-cell_size = 60
+cell = 60
 selected = None
 button_y = 560
 locked = [[False for _ in range(9)] for _ in range(9)]
@@ -21,13 +21,13 @@ def draw():
 def drawGrid():
     for i in range(10):
         strokeWeight(3 if i % 3 == 0 else 1)
-        line(0, i*cell_size, 9*cell_size, i*cell_size)
-        line(i*cell_size, 0, i*cell_size, 9*cell_size)
+        line(0, i*cell, 9*cell, i*cell)
+        line(i*cell, 0, i*cell, 9*cell)
     if selected:
         r, c = selected
         noFill()
         strokeWeight(3)
-        rect(c*cell_size, r*cell_size, cell_size, cell_size)
+        rect(c*cell, r*cell, cell, cell)
 
 def drawNumbers():
     textSize(32)
@@ -35,7 +35,7 @@ def drawNumbers():
         for c in range(9):
             if grid[r][c] != 0:
                 fill(0)
-                text(str(grid[r][c]), c*cell_size + cell_size/2, r*cell_size + cell_size/2)
+                text(str(grid[r][c]), c*cell + cell/2, r*cell + cell/2)
 
 def drawButtons():
     textSize(20)
@@ -51,8 +51,8 @@ def drawButtons():
 def mousePressed():
     global selected
     if mouseY < 540:
-        c = mouseX // cell_size
-        r = mouseY // cell_size
+        c = mouseX // cell
+        r = mouseY // cell
         if 0 <= r < 9 and 0 <= c < 9:
             selected = (r, c)
     elif button_y <= mouseY <= button_y+50:
